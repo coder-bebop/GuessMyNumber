@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Pressable, TextInput } from "react-native";
+import { View, Text, StyleSheet, Pressable, TextInput, Dimensions } from "react-native";
 import { useState, useRef } from "react";
 
 export default function StartScreen({ changeScreen }) {

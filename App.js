@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ImageBackground, StyleSheet, View, Text } from "react-native";
+import { ImageBackground, StyleSheet, View, Text, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Start, Game, Credits } from "./screens";
 import * as Font from 'expo-font';

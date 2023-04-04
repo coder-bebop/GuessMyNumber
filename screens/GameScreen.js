@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Pressable, FlatList } from "react-native";
+import { View, Text, StyleSheet, Pressable, FlatList, Dimensions } from "react-native";
 import Card from "../components/Card";
 import { generateRandomInt, cheatingPrompt } from "../utils";
 

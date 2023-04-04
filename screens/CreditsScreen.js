@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, Image, Pressable, ImageBackground } from "react-native";
+import { View, StyleSheet, Text, Image, Pressable, ImageBackground, Dimensions } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function CreditsScreen({ changeScreen, attemptsNumber }) {
@@ -45,19 +45,21 @@ export default function CreditsScreen({ changeScreen, attemptsNumber }) {
     );
 }
 
+const deviceWidthIsSmaller = Dimensions.get("window").width < 380;
+
 const styles = StyleSheet.create({
     screen: {
         flexDirection: "column",
         alignItems: "center",
-        marginTop: 40,
+        marginTop: deviceWidthIsSmaller ? 30 : 40,
     },
     imageContainer: {
         alignItems: "center",
         borderWidth: 1,
         borderRadius: 180,
         backgroundColor: "#8B0000",
-        padding: 10,
-        marginBottom: 30
+        padding: deviceWidthIsSmaller ? 7 : 10,
+        marginBottom: deviceWidthIsSmaller ? 20 : 30
     },
     image: {
         opacity: 0.6
@@ -65,10 +67,10 @@ const styles = StyleSheet.create({
     infoContainer: {
         alignItems: "center",
         backgroundColor: "#8b0000",
-        padding: 12,
+        padding: deviceWidthIsSmaller ? 9 : 12,
         borderRadius: 5,
         borderWidth: 0.5,
-        marginBottom: 10
+        marginBottom: deviceWidthIsSmaller ? 7 : 10
     },
     infoText: {
         
@@ -76,10 +78,10 @@ const styles = StyleSheet.create({
     buttonContainer: {
         alignItems: "center",
         backgroundColor: "#8b0000",
-        padding: 12,
+        padding: deviceWidthIsSmaller ? 9 : 12,
         borderRadius: 15,
         borderWidth: 0.5,
-        marginBottom: 30
+        marginBottom: deviceWidthIsSmaller ? 20 : 30
     },
     button: {
 
@@ -90,18 +92,18 @@ const styles = StyleSheet.create({
     creditsContainer: {
         alignItems: "center",
         backgroundColor: "#8b0000",
-        padding: 12,
+        padding: deviceWidthIsSmaller ? 9 : 12,
         borderRadius: 5,
         borderWidth: 0.5,
-        marginBottom: 10
+        marginBottom: deviceWidthIsSmaller ? 7 : 10
     },
     creditsText: {
-        fontSize: 17,
+        fontSize: deviceWidthIsSmaller ? 13 : 17,
         textAlign: "center"
     },
     nameContainer: {
-        padding: 10,
-        width: 150,
+        padding: deviceWidthIsSmaller ? 7 : 10,
+        width: deviceWidthIsSmaller ? 100 : 150,
         alignItems: "center",
         borderColor: "#000",
         borderWidth: 5,
@@ -110,20 +112,20 @@ const styles = StyleSheet.create({
     coderContainer: {},
     coderText: {
         fontFamily: "Exo 2",
-        fontSize: 30,
+        fontSize: deviceWidthIsSmaller ? 20 : 30,
         color: "#ffffff",
         transform: [{ skewX: '-10deg' }],
-        marginBottom: -25,
+        marginBottom: deviceWidthIsSmaller ? -12.5 : -25,
     },
     bebopContainer: {
         backgroundColor : "#0000",
         shadowColor: "#ff61af",
-        shadowOffset: { width: 2, height: 2 },
+        shadowOffset: { width: deviceWidthIsSmaller ? 1 : 2, height: deviceWidthIsSmaller ? 1 : 2 },
         shadowOpacity: 0.8,
     },
     bebopText: {
         fontFamily: "Mr Dafoe",
-        fontSize: 40,
+        fontSize: deviceWidthIsSmaller ? 30 : 40,
         color: "#ffffff",
         borderRadius: 200,
         shadowColor: "#ff61af",

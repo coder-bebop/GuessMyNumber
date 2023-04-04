@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View } from "react-native";
+import { View, Dimensions } from 'react-native'
 
 // this component tries to recreate CSS's 'text-shadow' property
 // to achieve something like this: https://codepen.io/ykadosh/pen/zYNxVKr

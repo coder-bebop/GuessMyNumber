@@ -1,5 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
-
+import { StyleSheet, Text, View, Dimensions } from "react-native";
 
 export default function Card(props) {
     return (
