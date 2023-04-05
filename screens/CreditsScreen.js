@@ -45,21 +45,21 @@ export default function CreditsScreen({ changeScreen, attemptsNumber }) {
     );
 }
 
-const deviceWidthIsSmaller = Dimensions.get("window").width < 380;
+const isWidthSmaller = Dimensions.get("window").width < 380;
 
 const styles = StyleSheet.create({
     screen: {
         flexDirection: "column",
         alignItems: "center",
-        marginTop: deviceWidthIsSmaller ? 30 : 40,
+        marginTop: isWidthSmaller ? 30 : 40,
     },
     imageContainer: {
         alignItems: "center",
         borderWidth: 1,
         borderRadius: 180,
         backgroundColor: "#8B0000",
-        padding: deviceWidthIsSmaller ? 7 : 10,
-        marginBottom: deviceWidthIsSmaller ? 20 : 30
+        padding: isWidthSmaller ? 7 : 10,
+        marginBottom: isWidthSmaller ? 20 : 30
     },
     image: {
         opacity: 0.6
@@ -67,10 +67,10 @@ const styles = StyleSheet.create({
     infoContainer: {
         alignItems: "center",
         backgroundColor: "#8b0000",
-        padding: deviceWidthIsSmaller ? 9 : 12,
+        padding: isWidthSmaller ? 9 : 12,
         borderRadius: 5,
         borderWidth: 0.5,
-        marginBottom: deviceWidthIsSmaller ? 7 : 10
+        marginBottom: isWidthSmaller ? 7 : 10
     },
     infoText: {
         
@@ -78,10 +78,10 @@ const styles = StyleSheet.create({
     buttonContainer: {
         alignItems: "center",
         backgroundColor: "#8b0000",
-        padding: deviceWidthIsSmaller ? 9 : 12,
+        padding: isWidthSmaller ? 9 : 12,
         borderRadius: 15,
         borderWidth: 0.5,
-        marginBottom: deviceWidthIsSmaller ? 20 : 30
+        marginBottom: isWidthSmaller ? 20 : 30
     },
     button: {
 
@@ -92,18 +92,18 @@ const styles = StyleSheet.create({
     creditsContainer: {
         alignItems: "center",
         backgroundColor: "#8b0000",
-        padding: deviceWidthIsSmaller ? 9 : 12,
+        padding: isWidthSmaller ? 9 : 12,
         borderRadius: 5,
         borderWidth: 0.5,
-        marginBottom: deviceWidthIsSmaller ? 7 : 10
+        marginBottom: isWidthSmaller ? 7 : 10
     },
     creditsText: {
-        fontSize: deviceWidthIsSmaller ? 13 : 17,
+        fontSize: isWidthSmaller ? 13 : 17,
         textAlign: "center"
     },
     nameContainer: {
-        padding: deviceWidthIsSmaller ? 7 : 10,
-        width: deviceWidthIsSmaller ? 100 : 150,
+        padding: isWidthSmaller ? 7 : 10,
+        width: isWidthSmaller ? 100 : 150,
         alignItems: "center",
         borderColor: "#000",
         borderWidth: 5,
@@ -112,20 +112,20 @@ const styles = StyleSheet.create({
     coderContainer: {},
     coderText: {
         fontFamily: "Exo 2",
-        fontSize: deviceWidthIsSmaller ? 20 : 30,
+        fontSize: isWidthSmaller ? 20 : 30,
         color: "#ffffff",
         transform: [{ skewX: '-10deg' }],
-        marginBottom: deviceWidthIsSmaller ? -12.5 : -25,
+        marginBottom: isWidthSmaller ? -12.5 : -25,
     },
     bebopContainer: {
         backgroundColor : "#0000",
         shadowColor: "#ff61af",
-        shadowOffset: { width: deviceWidthIsSmaller ? 1 : 2, height: deviceWidthIsSmaller ? 1 : 2 },
+        shadowOffset: { width: 2, height: 2 },
         shadowOpacity: 0.8,
     },
     bebopText: {
         fontFamily: "Mr Dafoe",
-        fontSize: deviceWidthIsSmaller ? 30 : 40,
+        fontSize: isWidthSmaller ? 30 : 40,
         color: "#ffffff",
         borderRadius: 200,
         shadowColor: "#ff61af",

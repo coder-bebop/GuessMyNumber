@@ -1,9 +1,11 @@
-import { View, Text, StyleSheet, Pressable, TextInput, Dimensions } from "react-native";
+import { View, Text, StyleSheet, Pressable, TextInput, useWindowDimensions } from "react-native";
 import { useState, useRef } from "react";
 
 export default function StartScreen({ changeScreen }) {
     const [inputNumber, setInputNumber] = useState(-1);
     const textInput = useRef();
+    const { height } = useWindowDimensions();
+    const isHeightSmaller = height < 380;
 
     function changeInputNumber(number) {
         setInputNumber(parseInt(number));
@@ -21,7 +23,7 @@ export default function StartScreen({ changeScreen }) {
     }
 
     return (
-        <View style={styles.screen}>
+        <View style={[styles.screen, { marginTop: isHeightSmaller ? 30 : 100 }]}>
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>Guess My Number</Text>
             </View>

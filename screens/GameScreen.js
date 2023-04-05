@@ -50,10 +50,11 @@ export default function GameScreen({ changeScreen, inputNumber }) {
     );
 }
 
+const isWidthSmaller = Dimensions.get("window").width < 380;
+
 const styles = StyleSheet.create({
     screen: {
         alignItems: "center",
-        marginTop: 100,
         flex: 1,
     },
     titleContainer: {
@@ -61,12 +62,12 @@ const styles = StyleSheet.create({
         borderColor: "#ffffff",
         alignItems: "center",
         justifyContent: "center",
-        width: 250,
-        height: 80,
-        marginBottom: 20,
+        width: deviceWidthIsSmaller ? 220 : 250,
+        height: deviceWidthIsSmaller ? 70 : 80,
+        marginBottom: deviceWidthIsSmaller ? 17 : 20,
     },
     titleText: {
-        fontSize: 18,
+        fontSize: deviceWidthIsSmaller ? 15 : 18,
         fontWeight: "bold",
         color: "#ffffff",
     },
@@ -75,34 +76,34 @@ const styles = StyleSheet.create({
         borderColor: "#daa520",
         alignItems: "center",
         justifyContent: "center",
-        width: 220,
-        height: 80,
-        marginBottom: 30,
+        width: deviceWidthIsSmaller ? 190 : 220,
+        height: deviceWidthIsSmaller ? 70 : 80,
+        marginBottom: deviceWidthIsSmaller ? 23 : 30,
     },
     numberText: {
         alignItems: "center",
-        fontSize: 20,
+        fontSize: deviceWidthIsSmaller ? 17 : 20,
         color: "#daa520",
     },
     inputContainer: {
         flexDirection: "column",
         alignItems: "center",
         backgroundColor: "#8B0000",
-        padding: 30,
+        padding: deviceWidthIsSmaller ? 23 : 30,
         borderRadius: 15,
         borderColor: "#000000",
         borderWidth: 0.75,
-        marginBottom: 20,
+        marginBottom: deviceWidthIsSmaller ? 17 : 20,
     },
     instructionsText: {
         color: "#daa520",
-        fontSize: 18,
+        fontSize: deviceWidthIsSmaller ? 15 : 18,
     },
     buttonContainer: {
         flexDirection: "row",
         justifyContent: "space-between",
-        paddingTop: 30,
-        width: 220,
+        paddingTop: deviceWidthIsSmaller ? 23 : 30,
+        width: deviceWidthIsSmaller ? 190 : 220,
     },
     button: {
         alignItems: "center",
@@ -110,11 +111,11 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         borderColor: "#000000",
         borderRadius: 50,
-        padding: 12,
-        width: 100,
+        padding: deviceWidthIsSmaller ? 9 : 12,
+        width: deviceWidthIsSmaller ? 80 : 100,
     },
     buttonText: {
-        fontSize: 16,
+        fontSize: deviceWidthIsSmaller ? 13 : 16,
     },
     roundsContainer: {},
 });

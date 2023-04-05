@@ -22,6 +22,7 @@ export default function App() {
   function restartGame() {
     setCurrentScreen(<Start changeScreen={startGameBound} />);
   }
+
   useEffect(() => {
     async function getFonts() {
       await Font.loadAsync({
@@ -32,6 +33,7 @@ export default function App() {
 
       setFontsLoaded(true);
     }
+    
     getFonts();
   }, []);
  
