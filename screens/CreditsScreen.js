@@ -1,51 +1,53 @@
-import { View, StyleSheet, Text, Image, Pressable, ImageBackground, Dimensions } from "react-native";
+import { View, StyleSheet, Text, Image, Pressable, ImageBackground, Dimensions, ScrollView } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function CreditsScreen({ changeScreen, attemptsNumber }) {
     return (
-        <View style={styles.screen}>
-            <LinearGradient colors={["#674889", "#e59977"]} style={styles.imageContainer}>
-                <Image
-                    style={styles.image}
-                    source={require('../assets/congratulations.png')}
-                    />
-            </LinearGradient>
-            <View style={styles.infoContainer}>
-                <Text style={styles.infoText}>
-                    It took the machine {attemptsNumber} attempts to find your number
-                </Text>
-            </View>
-            <View style={styles.buttonContainer}>
-                <Pressable style={styles.button} onPress={changeScreen}>
-                    <Text style={styles.buttonText}>Retry?</Text>
-                </Pressable>
-            </View>
-            <View style={styles.creditsContainer}>
-                <Text style={styles.creditsText}>
-                    DIRECTED, WRITTEN, PRODUCED {"&"} ACTED
-                    {"\n"}
-                    BY
-                </Text>
-            </View>
-            <ImageBackground
-                source={require("../assets/space-background.jpeg")}
-                style={styles.nameContainer}>
-                <View style={styles.coderContainer}>
-                    <Text style={styles.coderText}>
-                        Coder
+        <ScrollView style={{ flex: 1 }}>
+            <View style={styles.screen}>
+                <LinearGradient colors={["#674889", "#e59977"]} style={styles.imageContainer}>
+                    <Image
+                        style={styles.image}
+                        source={require('../assets/congratulations.png')}
+                        />
+                </LinearGradient>
+                <View style={styles.infoContainer}>
+                    <Text style={styles.infoText}>
+                        It took the machine {attemptsNumber} attempts to find your number
                     </Text>
                 </View>
-                <View style={styles.bebopContainer}>
-                    <Text style={styles.bebopText}>
-                        Bebop
+                <View style={styles.buttonContainer}>
+                    <Pressable style={styles.button} onPress={changeScreen}>
+                        <Text style={styles.buttonText}>Retry?</Text>
+                    </Pressable>
+                </View>
+                <View style={styles.creditsContainer}>
+                    <Text style={styles.creditsText}>
+                        DIRECTED, WRITTEN, PRODUCED {"&"} ACTED
+                        {"\n"}
+                        BY
                     </Text>
                 </View>
-            </ImageBackground>
-        </View>
+                <ImageBackground
+                    source={require("../assets/space-background.jpeg")}
+                    style={styles.nameContainer}>
+                    <View style={styles.coderContainer}>
+                        <Text style={styles.coderText}>
+                            Coder
+                        </Text>
+                    </View>
+                    <View style={styles.bebopContainer}>
+                        <Text style={styles.bebopText}>
+                            Bebop
+                        </Text>
+                    </View>
+                </ImageBackground>
+            </View>
+        </ScrollView>
     );
 }
 
-const isWidthSmaller = Dimensions.get("window").width < 380;
+const isWidthSmaller = Dimensions.get("window").width < 370;
 
 const styles = StyleSheet.create({
     screen: {

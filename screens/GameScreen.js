@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Pressable, FlatList, Dimensions } from "react-native";
+import { View, Text, StyleSheet, Pressable, FlatList, Dimensions, useWindowDimensions, ScrollView } from "react-native";
 import Card from "../components/Card";
 import { generateRandomInt, cheatingPrompt } from "../utils";
 
@@ -8,6 +8,7 @@ export default function GameScreen({ changeScreen, inputNumber }) {
     const [highest, setHighest] = useState(100);
     const [randomInt, setRandomInt] = useState(-1);
     const [guessRounds, setGuessRounds] = useState([]);
+    const { height } = useWindowDimensions();
 
     useEffect(() => {
         const newRandomInt = generateRandomInt(lowest, highest);
@@ -22,35 +23,37 @@ export default function GameScreen({ changeScreen, inputNumber }) {
     }, [lowest, highest]);
     
     return (
-        <View style={styles.screen}>
-            <View style={styles.titleContainer}>
-                <Text style={styles.titleText}>Opponent's Guess</Text>
-            </View>
-            <View style={styles.numberContainer}>
-                <Text style={styles.numberText}>{randomInt}</Text>
-            </View>
-            <View style={styles.inputContainer}>
-                <Text style={styles.instructionsText}>Higher or lower?</Text>
-                <View style={styles.buttonContainer}>
-                    <Pressable style={styles.button} onPress={() => randomInt < inputNumber ? cheatingPrompt() : setHighest(randomInt)}>
-                        <Text style={styles.buttonText}>—</Text>
-                    </Pressable>
-                    <Pressable style={styles.button} onPress={() => randomInt > inputNumber ? cheatingPrompt() : setLowest(randomInt + 1)}>
-                        <Text style={styles.buttonText}>+</Text>
-                    </Pressable>
+        <ScrollView style={{ flex: 1 }}>
+            <View style={[styles.screen, { marginTop: height < 400 ? 30 : 80 }]}>
+                <View style={styles.titleContainer}>
+                    <Text style={styles.titleText}>Opponent's Guess</Text>
                 </View>
+                <View style={styles.numberContainer}>
+                    <Text style={styles.numberText}>{randomInt}</Text>
+                </View>
+                <View style={styles.inputContainer}>
+                    <Text style={styles.instructionsText}>Higher or lower?</Text>
+                    <View style={styles.buttonContainer}>
+                        <Pressable style={styles.button} onPress={() => randomInt < inputNumber ? cheatingPrompt() : setHighest(randomInt)}>
+                            <Text style={styles.buttonText}>—</Text>
+                        </Pressable>
+                        <Pressable style={styles.button} onPress={() => randomInt > inputNumber ? cheatingPrompt() : setLowest(randomInt + 1)}>
+                            <Text style={styles.buttonText}>+</Text>
+                        </Pressable>
+                    </View>
+                </View>
+                <FlatList
+                    style={styles.roundsContainer}
+                    data={guessRounds}
+                    renderItem={({ item, index }) => <Card roundNumber={index} guessedNumber={item} />}
+                    keyExtractor={item => item}
+                    />
             </View>
-            <FlatList
-                style={styles.roundsContainer}
-                data={guessRounds}
-                renderItem={({ item, index }) => <Card roundNumber={index} guessedNumber={item} />}
-                keyExtractor={({ index }) => index}
-                />
-        </View>
+        </ScrollView>
     );
 }
 
-const isWidthSmaller = Dimensions.get("window").width < 380;
+const isWidthSmaller = Dimensions.get("window").width < 370;
 
 const styles = StyleSheet.create({
     screen: {
@@ -62,12 +65,12 @@ const styles = StyleSheet.create({
         borderColor: "#ffffff",
         alignItems: "center",
         justifyContent: "center",
-        width: deviceWidthIsSmaller ? 220 : 250,
-        height: deviceWidthIsSmaller ? 70 : 80,
-        marginBottom: deviceWidthIsSmaller ? 17 : 20,
+        width: isWidthSmaller ? 220 : 250,
+        height: isWidthSmaller ? 70 : 80,
+        marginBottom: isWidthSmaller ? 17 : 20,
     },
     titleText: {
-        fontSize: deviceWidthIsSmaller ? 15 : 18,
+        fontSize: isWidthSmaller ? 15 : 18,
         fontWeight: "bold",
         color: "#ffffff",
     },
@@ -76,34 +79,34 @@ const styles = StyleSheet.create({
         borderColor: "#daa520",
         alignItems: "center",
         justifyContent: "center",
-        width: deviceWidthIsSmaller ? 190 : 220,
-        height: deviceWidthIsSmaller ? 70 : 80,
-        marginBottom: deviceWidthIsSmaller ? 23 : 30,
+        width: isWidthSmaller ? 190 : 220,
+        height: isWidthSmaller ? 70 : 80,
+        marginBottom: isWidthSmaller ? 23 : 30,
     },
     numberText: {
         alignItems: "center",
-        fontSize: deviceWidthIsSmaller ? 17 : 20,
+        fontSize: isWidthSmaller ? 17 : 20,
         color: "#daa520",
     },
     inputContainer: {
         flexDirection: "column",
         alignItems: "center",
         backgroundColor: "#8B0000",
-        padding: deviceWidthIsSmaller ? 23 : 30,
+        padding: isWidthSmaller ? 23 : 30,
         borderRadius: 15,
         borderColor: "#000000",
         borderWidth: 0.75,
-        marginBottom: deviceWidthIsSmaller ? 17 : 20,
+        marginBottom: isWidthSmaller ? 17 : 20,
     },
     instructionsText: {
         color: "#daa520",
-        fontSize: deviceWidthIsSmaller ? 15 : 18,
+        fontSize: isWidthSmaller ? 15 : 18,
     },
     buttonContainer: {
         flexDirection: "row",
         justifyContent: "space-between",
-        paddingTop: deviceWidthIsSmaller ? 23 : 30,
-        width: deviceWidthIsSmaller ? 190 : 220,
+        paddingTop: isWidthSmaller ? 23 : 30,
+        width: isWidthSmaller ? 190 : 220,
     },
     button: {
         alignItems: "center",
@@ -111,11 +114,11 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         borderColor: "#000000",
         borderRadius: 50,
-        padding: deviceWidthIsSmaller ? 9 : 12,
-        width: deviceWidthIsSmaller ? 80 : 100,
+        padding: isWidthSmaller ? 9 : 12,
+        width: isWidthSmaller ? 80 : 100,
     },
     buttonText: {
-        fontSize: deviceWidthIsSmaller ? 13 : 16,
+        fontSize: isWidthSmaller ? 13 : 16,
     },
     roundsContainer: {},
 });

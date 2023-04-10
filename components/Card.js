@@ -9,7 +9,7 @@ export default function Card(props) {
     )
 };
 
-const isWidthSmaller = Dimensions.get("window").width < 380;
+const isWidthSmaller = Dimensions.get("window").width < 370;
 
 const styles = StyleSheet.create({
     card: {
@@ -18,11 +18,11 @@ const styles = StyleSheet.create({
         backgroundColor: "#d1d100",
         borderRadius: 20,
         marginBottom: isWidthSmaller ? 3 : 5,
-        padding: isWidthSmaller ? 7 : 10,
-        width: isWidthSmaller ? 200 : 300,
+        padding: isWidthSmaller ? 8 : 10,
+        width: isWidthSmaller ? 250 : 300,
     },
     cardText: {
         fontWeight: "bold",
-        fontSize: isWidthSmaller ? 200 : 16,
+        fontSize: isWidthSmaller ? 13 : 15,
     }
 });

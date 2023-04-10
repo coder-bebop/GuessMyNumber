@@ -1,11 +1,10 @@
-import { View, Text, StyleSheet, Pressable, TextInput, useWindowDimensions } from "react-native";
+import { View, Text, StyleSheet, Pressable, TextInput, useWindowDimensions, KeyboardAvoidingView, ScrollView } from "react-native";
 import { useState, useRef } from "react";
 
 export default function StartScreen({ changeScreen }) {
     const [inputNumber, setInputNumber] = useState(-1);
     const textInput = useRef();
     const { height } = useWindowDimensions();
-    const isHeightSmaller = height < 380;
 
     function changeInputNumber(number) {
         setInputNumber(parseInt(number));
@@ -23,37 +22,40 @@ export default function StartScreen({ changeScreen }) {
     }
 
     return (
-        <View style={[styles.screen, { marginTop: isHeightSmaller ? 30 : 100 }]}>
-            <View style={styles.titleContainer}>
-                <Text style={styles.titleText}>Guess My Number</Text>
-            </View>
-            <View style={styles.inputContainer}>
-                <Text style={styles.inputTitleText}>Enter a number</Text>
-                <TextInput
-                    ref={textInput}
-                    style={styles.numberInput}
-                    placeholder={"00"}
-                    inputMode="numeric"
-                    maxLength={2}
-                    onChangeText={changeInputNumber}
-                    />
-                <View style={styles.buttonContainer}>
-                    <Pressable style={styles.button} onPress={reset}>
-                        <Text style={styles.buttonText}>Reset</Text>
-                    </Pressable>
-                    <Pressable style={styles.button} onPress={confirm}>
-                        <Text style={styles.buttonText}>Confirm</Text>
-                    </Pressable>
+        <ScrollView style={{ flex: 1 }}>
+            <KeyboardAvoidingView style={{ flex: 1 }} behavior="position">
+                <View style={[styles.screen, { marginTop: height < 400 ? 30 : 100 }]}>
+                    <View style={styles.titleContainer}>
+                        <Text style={styles.titleText}>Guess My Number</Text>
+                    </View>
+                    <View style={styles.inputContainer}>
+                        <Text style={styles.inputTitleText}>Enter a number</Text>
+                        <TextInput
+                            ref={textInput}
+                            style={styles.numberInput}
+                            placeholder={"00"}
+                            inputMode="numeric"
+                            maxLength={2}
+                            onChangeText={changeInputNumber}
+                            />
+                        <View style={styles.buttonContainer}>
+                            <Pressable style={styles.button} onPress={reset}>
+                                <Text style={styles.buttonText}>Reset</Text>
+                            </Pressable>
+                            <Pressable style={styles.button} onPress={confirm}>
+                                <Text style={styles.buttonText}>Confirm</Text>
+                            </Pressable>
+                        </View>
+                    </View>
                 </View>
-            </View>
-        </View>
+            </KeyboardAvoidingView>
+        </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
     screen: {
         alignItems: "center",
-        marginTop: 100,
     },
     titleContainer: {
         borderWidth: 5,
