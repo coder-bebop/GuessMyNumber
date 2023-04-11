@@ -9,7 +9,7 @@ import {
     ScrollView,
 } from 'react-native'
 import Card from '../components/Card'
-import { generateRandomInt, cheatingPrompt } from '../utils'
+import { generateRandomInt, cheatingPrompt, createStyle } from '../utils'
 
 export default function GameScreen({ changeScreen, inputNumber }) {
     const [lowest, setLowest] = useState(0)
@@ -31,53 +31,73 @@ export default function GameScreen({ changeScreen, inputNumber }) {
     }, [lowest, highest])
 
     return (
-        <ScrollView style={{ flex: 1 }}>
-            <View
-                style={[styles.screen, { marginTop: height < 400 ? 30 : 80 }]}
-            >
-                <View style={styles.titleContainer}>
-                    <Text style={styles.titleText}>Opponent's Guess</Text>
-                </View>
-                <View style={styles.numberContainer}>
-                    <Text style={styles.numberText}>{randomInt}</Text>
-                </View>
-                <View style={styles.inputContainer}>
-                    <Text style={styles.instructionsText}>
-                        Higher or lower?
-                    </Text>
-                    <View style={styles.buttonContainer}>
-                        <Pressable
-                            style={styles.button}
-                            onPress={() =>
-                                randomInt < inputNumber
-                                    ? cheatingPrompt()
-                                    : setHighest(randomInt)
-                            }
+        <View style={styles.screen}>
+            <FlatList
+                data={guessRounds}
+                renderItem={({ item, index }) => (
+                    <Card roundNumber={index} guessedNumber={item} />
+                )}
+                keyExtractor={(item) => item}
+                ListHeaderComponent={
+                    <>
+                        <View
+                            style={[
+                                styles.screen,
+                                { marginTop: height < 400 ? 30 : 80 },
+                            ]}
                         >
-                            <Text style={styles.buttonText}>—</Text>
-                        </Pressable>
-                        <Pressable
-                            style={styles.button}
-                            onPress={() =>
-                                randomInt > inputNumber
-                                    ? cheatingPrompt()
-                                    : setLowest(randomInt + 1)
-                            }
-                        >
-                            <Text style={styles.buttonText}>+</Text>
-                        </Pressable>
-                    </View>
-                </View>
-                <FlatList
-                    style={styles.roundsContainer}
-                    data={guessRounds}
-                    renderItem={({ item, index }) => (
-                        <Card roundNumber={index} guessedNumber={item} />
-                    )}
-                    keyExtractor={(item) => item}
-                />
-            </View>
-        </ScrollView>
+                            <View style={styles.titleContainer}>
+                                <Text style={styles.titleText}>
+                                    Opponent's Guess
+                                </Text>
+                            </View>
+                            <View style={styles.numberContainer}>
+                                <Text style={styles.numberText}>
+                                    {randomInt}
+                                </Text>
+                            </View>
+                            <View style={styles.inputContainer}>
+                                <Text style={styles.instructionsText}>
+                                    Higher or lower?
+                                </Text>
+                                <View style={styles.buttonContainer}>
+                                    <View style={styles.buttonView}>
+                                        <Pressable
+                                            style={styles.buttonPressable}
+                                            onPress={() =>
+                                                randomInt < inputNumber
+                                                    ? cheatingPrompt()
+                                                    : setHighest(randomInt)
+                                            }
+                                            android_ripple={{ color: 'red' }}
+                                        >
+                                            <Text style={styles.buttonText}>
+                                                —
+                                            </Text>
+                                        </Pressable>
+                                    </View>
+                                    <View style={styles.buttonView}>
+                                        <Pressable
+                                            style={styles.buttonPressable}
+                                            onPress={() =>
+                                                randomInt > inputNumber
+                                                    ? cheatingPrompt()
+                                                    : setLowest(randomInt + 1)
+                                            }
+                                            android_ripple={{ color: 'red' }}
+                                        >
+                                            <Text style={styles.buttonText}>
+                                                +
+                                            </Text>
+                                        </Pressable>
+                                    </View>
+                                </View>
+                            </View>
+                        </View>
+                    </>
+                }
+            />
+        </View>
     )
 }
 
@@ -136,17 +156,23 @@ const styles = createStyle({
         paddingTop: isWidthSmaller ? 23 : 30,
         width: isWidthSmaller ? 190 : 220,
     },
-    button: {
+    buttonView: {
         alignItems: 'center',
         backgroundColor: '#a90000',
         borderWidth: 0.5,
         borderColor: '#000000',
         borderRadius: 50,
+        overflow: 'hidden',
+        margin: isWidthSmaller ? 9 : 12,
+        width: isWidthSmaller ? 70 : 90,
+    },
+    buttonPressable: {
+        borderRadius: 50,
+        alignItems: 'center',
         padding: isWidthSmaller ? 9 : 12,
-        width: isWidthSmaller ? 80 : 100,
+        width: isWidthSmaller ? 70 : 90,
     },
     buttonText: {
         fontSize: isWidthSmaller ? 13 : 16,
     },
-    roundsContainer: {},
 })

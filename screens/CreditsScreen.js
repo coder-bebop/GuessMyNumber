@@ -8,7 +8,7 @@ import {
     ScrollView,
 } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
-import { createStyle } from './utils'
+import { createStyle } from '../utils'
 
 export default function CreditsScreen({ changeScreen, attemptsNumber }) {
     return (
@@ -29,8 +29,12 @@ export default function CreditsScreen({ changeScreen, attemptsNumber }) {
                         your number
                     </Text>
                 </View>
-                <View style={styles.buttonContainer}>
-                    <Pressable style={styles.button} onPress={changeScreen}>
+                <View style={styles.buttonView}>
+                    <Pressable
+                        style={styles.buttonPressable}
+                        onPress={changeScreen}
+                        android_ripple={{ color: 'red' }}
+                    >
                         <Text style={styles.buttonText}>Retry?</Text>
                     </Pressable>
                 </View>
@@ -85,15 +89,19 @@ const styles = createStyle({
         marginBottom: isWidthSmaller ? 7 : 10,
     },
     infoText: {},
-    buttonContainer: {
+    buttonView: {
         alignItems: 'center',
         backgroundColor: '#8b0000',
-        padding: isWidthSmaller ? 9 : 12,
         borderRadius: 15,
         borderWidth: 0.5,
+        margin: isWidthSmaller ? 9 : 12,
         marginBottom: isWidthSmaller ? 20 : 30,
     },
-    button: {},
+    buttonPressable: {
+        alignItems: 'center',
+        borderRadius: 15,
+        padding: isWidthSmaller ? 9 : 12,
+    },
     buttonText: {
         fontWeight: 'bold',
     },

@@ -8,6 +8,7 @@ import {
     ScrollView,
 } from 'react-native'
 import { useState, useRef } from 'react'
+import { createStyle } from '../utils'
 
 export default function StartScreen({ changeScreen }) {
     const [inputNumber, setInputNumber] = useState(-1)
@@ -54,12 +55,26 @@ export default function StartScreen({ changeScreen }) {
                             onChangeText={changeInputNumber}
                         />
                         <View style={styles.buttonContainer}>
-                            <Pressable style={styles.button} onPress={reset}>
-                                <Text style={styles.buttonText}>Reset</Text>
-                            </Pressable>
-                            <Pressable style={styles.button} onPress={confirm}>
-                                <Text style={styles.buttonText}>Confirm</Text>
-                            </Pressable>
+                            <View style={styles.buttonView}>
+                                <Pressable
+                                    style={styles.buttonPressable}
+                                    onPress={reset}
+                                    android_ripple={{ color: 'red' }}
+                                >
+                                    <Text style={styles.buttonText}>Reset</Text>
+                                </Pressable>
+                            </View>
+                            <View style={styles.buttonView}>
+                                <Pressable
+                                    style={styles.buttonPressable}
+                                    onPress={confirm}
+                                    android_ripple={{ color: 'red' }}
+                                >
+                                    <Text style={styles.buttonText}>
+                                        Confirm
+                                    </Text>
+                                </Pressable>
+                            </View>
                         </View>
                     </View>
                 </View>
@@ -112,11 +127,16 @@ const styles = createStyle({
         paddingTop: 30,
         width: 200,
     },
-    button: {
+    buttonView: {
         borderWidth: 0.5,
         borderColor: '#000000',
         borderRadius: 20,
         backgroundColor: '#a90000',
+        margin: 13,
+        overflow: 'hidden',
+    },
+    buttonPressable: {
+        borderRadius: 20,
         padding: 13,
     },
     buttonText: {

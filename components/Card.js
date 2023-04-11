@@ -1,5 +1,5 @@
 import { Text, View, Dimensions } from 'react-native'
-import { createStyle } from './utils'
+import { createStyle } from '../utils'
 
 export default function Card(props) {
     return (
